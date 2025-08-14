@@ -10,7 +10,7 @@ export class HomePage extends BasePage {
     await this.goto();
   }
 
-  get navLink(name: string): Locator {
+  navLink(name: string): Locator {
     return this.page.getByRole('link', { name: new RegExp(name, 'i') }).first();
   }
 
@@ -19,49 +19,47 @@ export class HomePage extends BasePage {
   }
 
   get politicsLink(): Locator {
-    return this.page.getByRole('link', { name: /politics/i }).first();
+    return this.page.locator('a[href*="/category/politics"]').first();
   }
 
   get ourLatviaLink(): Locator {
-    return this.page.getByRole('link', { name: /our latvia/i }).first();
+    return this.page.locator('a[href*="/category/our-latvia"]').first();
   }
 
   get emergenciesLink(): Locator {
-    return this.page.getByRole('link', { name: /emergencies|crime/i }).first();
+    return this.page.locator('a[href*="/category/emergencies-and-crime"]').first();
   }
 
   get worldNewsLink(): Locator {
-    return this.page.getByRole('link', { name: /world news/i }).first();
+    return this.page.locator('a[href*="/category/world-news"]').first();
   }
 
   get lifenewsLink(): Locator {
-    return this.page.getByRole('link', { name: /lifenews|life news/i }).first();
+    return this.page.locator('a[href*="/category/lifenews"]').first();
   }
 
   get businessLink(): Locator {
-    return this.page.getByRole('link', { name: /business/i }).first();
+    return this.page.locator('a[href*="/category/business"]').first();
   }
 
   get weatherLink(): Locator {
-    return this.page.getByRole('link', { name: /weather/i }).or(
-      this.page.locator('text=/weather|°C|°С/').first()
-    ).first();
+    return this.page.locator('a[href*="weather"]').or(this.page.getByText(/weather|°C|°С|\d+°/)).first();
   }
 
   get technologiesLink(): Locator {
-    return this.page.getByRole('link', { name: /technologies/i }).first();
+    return this.page.locator('a[href*="/category/technologies"]').first();
   }
 
   get homeGardenLink(): Locator {
-    return this.page.getByRole('link', { name: /home and garden/i }).first();
+    return this.page.locator('a[href*="/category/home-and-garden"]').first();
   }
 
   get foodRecipesLink(): Locator {
-    return this.page.getByRole('link', { name: /food and recipes|food & recipes/i }).first();
+    return this.page.locator('a[href*="/category/food-and-recipes"]').first();
   }
 
   get animalWorldLink(): Locator {
-    return this.page.getByRole('link', { name: /animal world|in the animal world/i }).first();
+    return this.page.locator('a[href*="/category/in-the-animal-world"]').first();
   }
 
   get womanLink(): Locator {
@@ -88,7 +86,7 @@ export class HomePage extends BasePage {
     return this.page.locator('a[href*="bb.lv"], [class*="lang"], [class*="language"]').first();
   }
 
-  get dropdownTrigger(name: string): Locator {
+  dropdownTrigger(name: string): Locator {
     return this.page.getByRole('button', { name: new RegExp(name, 'i') })
       .or(this.page.getByRole('link', { name: new RegExp(name, 'i') })).first();
   }

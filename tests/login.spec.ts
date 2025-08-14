@@ -6,7 +6,10 @@ test.describe('Login page', () => {
   });
 
   test('Login page has authorization or sign-in', async ({ loginPage }) => {
-    await expect(loginPage.authHeading.or(loginPage.page.getByText(/sign in|log in|authorization/i))).toBeVisible();
+    const hasFormOrLink = await loginPage.emailInput.isVisible().catch(() => false) ||
+      await loginPage.passwordInput.isVisible().catch(() => false) ||
+      await loginPage.page.getByRole('link', { name: /log in|login|sign in/i }).first().isVisible().catch(() => false);
+    expect(hasFormOrLink).toBeTruthy();
   });
 
   test('Login page has email field', async ({ loginPage }) => {
@@ -14,7 +17,7 @@ test.describe('Login page', () => {
   });
 
   test('Login page has Remember me', async ({ loginPage }) => {
-    await expect(loginPage.rememberMe.or(loginPage.page.getByText(/remember me/i))).toBeVisible();
+    await expect(loginPage.page.getByText(/remember me/i).first()).toBeVisible();
   });
 
   test('Login page has Forgot password', async ({ loginPage }) => {

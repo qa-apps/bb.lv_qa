@@ -23,7 +23,7 @@ export class LoginPage extends BasePage {
   }
 
   get rememberMe(): Locator {
-    return this.page.getByLabel(/remember me|remember/i).or(
+    return this.page.getByLabel(/remember me|remember/i).first().or(
       this.page.locator('input[type="checkbox"]').first()
     );
   }
@@ -54,6 +54,7 @@ export class LoginPage extends BasePage {
     const loginLink = this.page.getByRole('link', { name: /log in|login|sign in/i }).first();
     if (await loginLink.isVisible()) {
       await loginLink.click();
+      await this.page.waitForTimeout(2000);
     }
   }
 

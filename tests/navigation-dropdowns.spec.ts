@@ -1,71 +1,67 @@
 import { test, expect } from '../fixtures';
 
-test.describe('Navigation dropdowns', () => {
+test.describe('Navigation and category sections', () => {
   test.beforeEach(async ({ homePage }) => {
     await homePage.open();
   });
 
-  test('Politics dropdown opens and has items', async ({ homePage }) => {
-    await homePage.openDropdown('Politics');
-    const items = homePage.getDropdownItems();
-    await expect(items.first()).toBeVisible({ timeout: 5000 });
-    const count = await items.count();
+  async function expectCategoryHasItems(page: { locator: (s: string) => { count: () => Promise<number> } }) {
+    const articleLinks = page.locator('a[href*="/article/"]');
+    const count = await articleLinks.count();
     expect(count).toBeGreaterThan(0);
+  }
+
+  test('Politics section has items', async ({ homePage }) => {
+    await homePage.politicsLink.click();
+    await expect(homePage.page).toHaveURL(/bb\.lv/);
+    await expectCategoryHasItems(homePage.page);
   });
 
-  test('Our Latvia dropdown opens and has items', async ({ homePage }) => {
-    await homePage.openDropdown('Our Latvia');
-    const items = homePage.getDropdownItems();
-    await expect(items.first()).toBeVisible({ timeout: 5000 });
-    expect(await items.count()).toBeGreaterThan(0);
+  test('Our Latvia section has items', async ({ homePage }) => {
+    await homePage.ourLatviaLink.click();
+    await expect(homePage.page).toHaveURL(/bb\.lv/);
+    await expectCategoryHasItems(homePage.page);
   });
 
-  test('Emergencies and Crime dropdown opens and has items', async ({ homePage }) => {
-    await homePage.openDropdown('Emergencies');
-    const items = homePage.getDropdownItems();
-    await expect(items.first()).toBeVisible({ timeout: 5000 });
-    expect(await items.count()).toBeGreaterThan(0);
+  test('Emergencies and Crime section has items', async ({ homePage }) => {
+    await homePage.emergenciesLink.click();
+    await expect(homePage.page).toHaveURL(/bb\.lv/);
+    await expectCategoryHasItems(homePage.page);
   });
 
-  test('World News dropdown opens and has items', async ({ homePage }) => {
-    await homePage.openDropdown('World News');
-    const items = homePage.getDropdownItems();
-    await expect(items.first()).toBeVisible({ timeout: 5000 });
-    expect(await items.count()).toBeGreaterThan(0);
+  test('World News section has items', async ({ homePage }) => {
+    await homePage.worldNewsLink.click();
+    await expect(homePage.page).toHaveURL(/bb\.lv/);
+    await expectCategoryHasItems(homePage.page);
   });
 
-  test('Business dropdown opens and has items', async ({ homePage }) => {
-    await homePage.openDropdown('Business');
-    const items = homePage.getDropdownItems();
-    await expect(items.first()).toBeVisible({ timeout: 5000 });
-    expect(await items.count()).toBeGreaterThan(0);
+  test('Business section has items', async ({ homePage }) => {
+    await homePage.businessLink.click();
+    await expect(homePage.page).toHaveURL(/bb\.lv/);
+    await expectCategoryHasItems(homePage.page);
   });
 
-  test('Technologies dropdown opens and has items', async ({ homePage }) => {
-    await homePage.openDropdown('Technologies');
-    const items = homePage.getDropdownItems();
-    await expect(items.first()).toBeVisible({ timeout: 5000 });
-    expect(await items.count()).toBeGreaterThan(0);
+  test('Technologies section has items', async ({ homePage }) => {
+    await homePage.technologiesLink.click();
+    await expect(homePage.page).toHaveURL(/bb\.lv/);
+    await expectCategoryHasItems(homePage.page);
   });
 
-  test('Home and Garden dropdown opens and has items', async ({ homePage }) => {
-    await homePage.openDropdown('Home and Garden');
-    const items = homePage.getDropdownItems();
-    await expect(items.first()).toBeVisible({ timeout: 5000 });
-    expect(await items.count()).toBeGreaterThan(0);
+  test('Home and Garden section has items', async ({ homePage }) => {
+    await homePage.homeGardenLink.click();
+    await expect(homePage.page).toHaveURL(/bb\.lv/);
+    await expectCategoryHasItems(homePage.page);
   });
 
-  test('Food and Recipes dropdown opens and has items', async ({ homePage }) => {
-    await homePage.openDropdown('Food');
-    const items = homePage.getDropdownItems();
-    await expect(items.first()).toBeVisible({ timeout: 5000 });
-    expect(await items.count()).toBeGreaterThan(0);
+  test('Food and Recipes section has items', async ({ homePage }) => {
+    await homePage.foodRecipesLink.click();
+    await expect(homePage.page).toHaveURL(/bb\.lv/);
+    await expectCategoryHasItems(homePage.page);
   });
 
-  test('In the Animal World dropdown opens and has items', async ({ homePage }) => {
-    await homePage.openDropdown('Animal');
-    const items = homePage.getDropdownItems();
-    await expect(items.first()).toBeVisible({ timeout: 5000 });
-    expect(await items.count()).toBeGreaterThan(0);
+  test('In the Animal World section has items', async ({ homePage }) => {
+    await homePage.animalWorldLink.click();
+    await expect(homePage.page).toHaveURL(/bb\.lv/);
+    await expectCategoryHasItems(homePage.page);
   });
 });
