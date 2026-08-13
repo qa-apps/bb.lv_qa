@@ -6,3 +6,14 @@ playwright/.cache/
 *.log
 .env
 .env.local
+.codex/
+AGENTS.md
+graphify-out/
+.idea/
+temp_*.md
+temp_*.txt
+screenshot.png
+.claude/settings.local.json
+.claude/launch.json
+backdate_commits.sh
+do_commits.sh
